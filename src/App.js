@@ -1,12 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
 import { Header } from './components/Header';
+import { Characters } from './components/Characters';
+import { ModeProvider } from './providers/ModeProvider';
 
 function App() {
   return (
-    <div className="Header">
-      <h1>Hello World!</h1>
-      <Header />
+    <div className="App">
+      <ModeProvider>
+        <Header />
+        <Characters/>
+      </ModeProvider>
     </div>
   );
 }
