@@ -43,7 +43,7 @@ export const Characters = () => {
         <>
             <div className={ `Characters ${isDarkMode && 'Characters-DarkMode'}` }>
                 { favoritesCharacters.favorites.length > 0 && <FavoritesCharacters characters={ favoritesCharacters }/> }
-                <h2 className='TitleAllCharacters'>All characters</h2>
+                <h2 className={ `TitleAllCharacters ${ isDarkMode && 'TitleAllCharacters-DarkMode' }` }>All characters</h2>
                 <div className='Characters-grid-content'>
                     {
                         characters.map(character => (
