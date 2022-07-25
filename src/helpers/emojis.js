@@ -4,5 +4,10 @@ export const emojis = {
     human: '🌎',
     alien: '👽',
     male: '👨',
-    female: '👧'
+    female: '👧',
+    questionMark: '❓'
+};
+
+export const getEmoji = (type) => {
+    return emojis[type] ?? '❓'
 }

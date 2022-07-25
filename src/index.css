@@ -138,9 +138,41 @@ div.Header > h1 {
   margin-left: 10px;
 }
 
-@media screen and (max-width: 600px){
+.Search {
+  text-align: center;
+}
+
+.txt-search {
+  border: solid 3px var(--YaleBlue);
+  border-radius: 20px;
+  text-align: center;
+  font-size: 2rem;
+  width: 25%;
+  padding: 10px;
+}
+
+.txt-search:focus {
+  outline: none;
+}
+
+@media screen and (max-width: 992px){
   .Characters-grid-content {
-    grid-template-columns: auto;
+    grid-template-columns: auto auto auto auto;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .Characters {
+    width: 100%;
+  }
+
+  .Characters-grid-content {
+    display: grid;
+    grid-template-columns: repeat(auto, 1);
+  }
+
+  .Character-item {
+    width: 100%;
   }
 }
 
