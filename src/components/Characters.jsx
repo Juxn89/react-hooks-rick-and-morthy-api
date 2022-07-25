@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useReducer, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import { ModeContext } from '../context/ModeContext';
 import { CharacterReducer } from '../reducers/CharactersReducer';
 import { emojis } from '../helpers/emojis';
@@ -23,7 +23,8 @@ const INITIAL_STATE = {
 export const Characters = () => {
     const {isDarkMode} = useContext(ModeContext);
     const [characters, setCharacters] = useState([]);
-    const [Search, setSearch] = useState('')
+    const [Search, setSearch] = useState('');
+    const searchInput = useRef(null);
 
     const [favoritesCharacters, dispatch] = useReducer(CharacterReducer, INITIAL_STATE);
 
@@ -46,8 +47,8 @@ export const Characters = () => {
         }
     }
 
-    const handlSearch = (event) => {
-        setSearch(event.target.value);
+    const handlSearch = () => {
+        setSearch(searchInput.current.value);
     }    
     
     return (
@@ -56,7 +57,7 @@ export const Characters = () => {
                 { favoritesCharacters.favorites.length > 0 && <FavoritesCharacters characters={ favoritesCharacters }/> }
                 <h2 className={ `TitleAllCharacters ${ isDarkMode && 'TitleAllCharacters-DarkMode' }` }>All characters</h2>
                 <div className='Search'>
-                    <input className='txt-search' type='text' placeholder='Search a character...' onChange={ handlSearch } value={ Search }/>
+                    <input ref={ searchInput } className='txt-search' type='text' placeholder='Search a character...' onChange={ handlSearch } value={ Search }/>
                 </div>
                 <div className='Characters-grid-content'>
                     {
