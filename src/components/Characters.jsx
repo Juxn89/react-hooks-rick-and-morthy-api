@@ -1,9 +1,12 @@
-import React, { useContext, useEffect, useMemo, useReducer, useRef, useState } from 'react';
-import { ModeContext } from '../context/ModeContext';
+import React, { useCallback, useContext, useEffect, useMemo, useReducer, useRef, useState } from 'react';
+import { FavoritesCharacters } from './FavoritesCharacters';
+import { Search as SearchComponent } from './Search';
+
 import { CharacterReducer } from '../reducers/CharactersReducer';
+import { ModeContext } from '../context/ModeContext';
+
 import { emojis } from '../helpers/emojis';
 import { CharactersType } from '../types/CharactersType';
-import { FavoritesCharacters } from './FavoritesCharacters';
 
 const STATUS = {
     alive: 'Alive',
@@ -47,18 +50,21 @@ export const Characters = () => {
         }
     }
 
-    const handlSearch = () => {
+    const handleSearch = () => {
         setSearch(searchInput.current.value);
-    }    
+    }
+
+    const handleSearchUseCallback = useCallback( () => {
+        setSearch(searchInput.current.value);
+    }, [] );
     
     return (
         <>
             <div className={ `Characters ${isDarkMode && 'Characters-DarkMode'}` }>
                 { favoritesCharacters.favorites.length > 0 && <FavoritesCharacters characters={ favoritesCharacters }/> }
                 <h2 className={ `TitleAllCharacters ${ isDarkMode && 'TitleAllCharacters-DarkMode' }` }>All characters</h2>
-                <div className='Search'>
-                    <input ref={ searchInput } className='txt-search' type='text' placeholder='Search a character...' onChange={ handlSearch } value={ Search }/>
-                </div>
+                {/* <SearchComponent search={ Search } searchInput= { searchInput } handleSearch={ handleSearch } /> */}
+                <SearchComponent search={ Search } searchInput= { searchInput } handleSearch={ handleSearchUseCallback } />
                 <div className='Characters-grid-content'>
                     {
                         filteredCharacters.map(character => (
